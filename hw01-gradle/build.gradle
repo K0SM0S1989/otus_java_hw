@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation 'com.google.guava:guava'
+    implementation 'com.zaxxer:HikariCP'
+
+    implementation("org.springframework.data:spring-data-hadoop:2.0.0.RELEASE")
+    implementation("org.springframework:spring-tx:3.2.3.RELEASE")
+}
+
+shadowJar {
+    archiveBaseName.set('gradleHelloWorld')
+    archiveVersion.set('0.1')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'ru.learn_java.HelloOtus'
+    }
+}
+
+tasks.build.dependsOn tasks.shadowJar
